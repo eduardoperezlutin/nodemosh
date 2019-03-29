@@ -7,6 +7,10 @@ const app = express();
 // middleware to use json responses
 app.use(express.json());
 
+// buil-in middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
+
 // create custom middleware
 app.use(logger);
 
