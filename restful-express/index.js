@@ -1,7 +1,9 @@
 const Joi = require('joi');
+const helmet = require('helmet');
+const morgan = require('morgan');
+const express = require('express');
 const logger = require('./logger');
 const auth = require('./authenticator');
-const express = require('express');
 const app = express();
 
 // middleware to use json responses
@@ -11,10 +13,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-// create custom middleware
+// custom middlewares
 app.use(logger);
-
 app.use(auth); 
+
+//  third party middlewares
+app.use(helmet());
+app.use(morgan('tiny'));
 
 const courses = [
     {id: 1, name: 'course1'},
