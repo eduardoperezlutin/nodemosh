@@ -1,9 +1,18 @@
 const Joi = require('joi');
+const logger = require('./logger');
 const express = require('express');
 const app = express();
 
 // middleware to use json responses
 app.use(express.json());
+
+// create custom middleware
+app.use(logger);
+
+app.use(function(req, res, next) {
+    console.log('Logging...');
+    next();
+}) 
 
 const courses = [
     {id: 1, name: 'course1'},
