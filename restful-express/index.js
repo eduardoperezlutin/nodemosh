@@ -19,7 +19,11 @@ app.use(auth);
 
 //  third party middlewares
 app.use(helmet());
-app.use(morgan('tiny'));
+
+if (app.get('env') == 'development') {
+    app.use(morgan('tiny'));
+    console.log('Morgan Enabled...');
+}
 
 const courses = [
     {id: 1, name: 'course1'},
